@@ -45,6 +45,7 @@ examples/
   support-slot-scouting-prompt.md
   vexra-compilation-overlay-prompt.md
 scripts/
+  example-run.sh
   test.sh
 install.sh
 ```
@@ -117,6 +118,17 @@ The test checks:
 - required repo files exist
 - `install.sh` copies both skills into temporary Claude and Codex skill directories
 - the installed skill folders contain their `SKILL.md` files
+- the built-in example prompt printer runs successfully
+
+## Example Prompts
+
+Run:
+
+```bash
+./scripts/example-run.sh
+```
+
+That prints the included example prompts so you can copy them directly into Claude, Codex, or Gemini.
 
 ## Prompt Pattern
 

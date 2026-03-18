@@ -27,6 +27,7 @@ require_file "$ROOT_DIR/examples/compilation-scouting-prompt.md"
 require_file "$ROOT_DIR/examples/support-slot-scouting-prompt.md"
 require_file "$ROOT_DIR/examples/vexra-compilation-overlay-prompt.md"
 require_file "$ROOT_DIR/install.sh"
+require_file "$ROOT_DIR/scripts/example-run.sh"
 
 TMP_HOME=$(mktemp -d)
 trap 'rm -rf "$TMP_HOME"' EXIT INT TERM
@@ -37,5 +38,7 @@ require_file "$TMP_HOME/.claude/skills/artist-research/SKILL.md"
 require_file "$TMP_HOME/.claude/skills/artist-outreach/SKILL.md"
 require_file "$TMP_HOME/.codex/skills/artist-research/SKILL.md"
 require_file "$TMP_HOME/.codex/skills/artist-outreach/SKILL.md"
+
+sh "$ROOT_DIR/scripts/example-run.sh" >/tmp/artist_scout_example_run.log
 
 printf 'PASS: file layout and install behavior verified\n'
