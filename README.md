@@ -44,6 +44,28 @@ examples/
   compilation-scouting-prompt.md
   support-slot-scouting-prompt.md
   vexra-compilation-overlay-prompt.md
+scripts/
+  test.sh
+install.sh
+```
+
+## Quick Install
+
+Run:
+
+```bash
+./install.sh
+```
+
+That installs both skills into:
+
+- `~/.claude/skills/`
+- `~/.codex/skills/`
+
+You can override either destination:
+
+```bash
+CLAUDE_SKILLS_DIR=/custom/claude/skills CODEX_SKILLS_DIR=/custom/codex/skills ./install.sh
 ```
 
 ## Using With Claude
@@ -81,6 +103,20 @@ cp -R skills/artist-outreach /path/to/your/gemini-skills/
 ```
 
 If your Gemini environment does not support formal skills, you can still use the files as a structured prompt pack by pasting the `SKILL.md` contents plus any needed references.
+
+## Testing
+
+Run:
+
+```bash
+./scripts/test.sh
+```
+
+The test checks:
+
+- required repo files exist
+- `install.sh` copies both skills into temporary Claude and Codex skill directories
+- the installed skill folders contain their `SKILL.md` files
 
 ## Prompt Pattern
 
