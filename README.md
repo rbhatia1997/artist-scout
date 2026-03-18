@@ -58,6 +58,12 @@ Run:
 ./install.sh
 ```
 
+Or:
+
+```bash
+make install
+```
+
 That installs both skills into:
 
 - `~/.claude/skills/`
@@ -113,6 +119,12 @@ Run:
 ./scripts/test.sh
 ```
 
+Or:
+
+```bash
+make test
+```
+
 The test checks:
 
 - required repo files exist
@@ -126,6 +138,12 @@ Run:
 
 ```bash
 ./scripts/example-run.sh
+```
+
+Or:
+
+```bash
+make examples
 ```
 
 That prints the included example prompts so you can copy them directly into Claude, Codex, or Gemini.
