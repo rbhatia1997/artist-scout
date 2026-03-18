@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArtistProspectList",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "artist_name",
+      "artist_handle",
+      "country_region",
+      "primary_genre_style",
+      "main_platform",
+      "follower_count_estimate",
+      "contact_method",
+      "contact_details_or_link",
+      "representation_status",
+      "sonic_fit_notes",
+      "why_they_fit",
+      "risks_caveats",
+      "already_in_existing_list",
+      "score_sonic_fit",
+      "score_underground_credibility",
+      "score_outreach_realism",
+      "score_independence",
+      "score_distinctiveness",
+      "score_total",
+      "outreach_priority",
+      "source_links"
+    ],
+    "properties": {
+      "artist_name": { "type": "string" },
+      "artist_handle": { "type": "string" },
+      "country_region": { "type": "string" },
+      "primary_genre_style": { "type": "string" },
+      "main_platform": { "type": "string" },
+      "follower_count_estimate": { "type": "string" },
+      "contact_method": { "type": "string" },
+      "contact_details_or_link": { "type": "string" },
+      "representation_status": {
+        "type": "string",
+        "enum": ["none found", "likely independent", "management found", "unclear"]
+      },
+      "sonic_fit_notes": { "type": "string" },
+      "why_they_fit": { "type": "string" },
+      "risks_caveats": { "type": "string" },
+      "already_in_existing_list": {
+        "type": "string",
+        "enum": ["Yes", "No"]
+      },
+      "score_sonic_fit": { "type": "integer", "minimum": 0, "maximum": 10 },
+      "score_underground_credibility": { "type": "integer", "minimum": 0, "maximum": 10 },
+      "score_outreach_realism": { "type": "integer", "minimum": 0, "maximum": 10 },
+      "score_independence": { "type": "integer", "minimum": 0, "maximum": 10 },
+      "score_distinctiveness": { "type": "integer", "minimum": 0, "maximum": 10 },
+      "score_total": { "type": "integer", "minimum": 0, "maximum": 50 },
+      "outreach_priority": {
+        "type": "string",
+        "enum": ["High", "Medium", "Low"]
+      },
+      "source_links": { "type": "string" }
+    },
+    "additionalProperties": false
+  }
+}
