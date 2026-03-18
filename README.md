@@ -1,42 +1,64 @@
 # artist-scout
 
-Reusable A&R research skill package for Claude, Codex, and Gemini-style agent workflows.
+Open-source AI A&R toolkit for artist scouting, shortlist building, and outreach prep.
 
-The repo is built around two portable skills:
+`artist-scout` is built for:
 
-- `skills/artist-research/`
-- `skills/artist-outreach/`
+- record labels
+- artist managers
+- curators
+- promoters
+- independent teams doing manual A&R
 
-That skill is designed for:
+It helps turn messy artist discovery into a repeatable workflow:
 
-- underground artist scouting
-- label compilation research
-- remix or feature outreach lists
-- regional scene mapping
-- support-slot and lineup discovery
+1. find artists
+2. verify fit
+3. capture contact paths
+4. score and rank prospects
+5. prep outreach
 
-It is not tied to one label. You provide the taste profile, size limits, contactability rules, output schema, and quality bar.
+This repo is not tied to one label. You bring the taste profile, scene, market, and release brief. The workflow stays reusable.
 
-## What This Repo Contains
+## What It Does
 
-- A generic artist research skill
-- A generic artist outreach skill
-- Reference docs for scoring, verification, and output structure
-- Reusable JSON schema and CSV template files
-- Example prompts for common A&R tasks
+- researches artists for compilations, remixes, features, and lineups
+- builds structured shortlists with evidence and source links
+- flags contact routes and representation status
+- scores prospects by fit, credibility, realism, independence, and distinctiveness
+- prepares first-contact outreach without sounding mass-sent
+
+## Who It Is For
+
+Use this if you want a more disciplined version of:
+
+- late-night SoundCloud rabbit holes
+- scattered notes in DMs and spreadsheets
+- inconsistent scouting criteria across releases
+- weak handoff from discovery to outreach
+
+## What’s In The Repo
+
+Two reusable skills:
+
+- `artist-research`
+  For discovery, verification, dedupe, scoring, and export
+- `artist-outreach`
+  For contact prioritization and first-contact drafting
+
+Supporting assets:
+
+- output schema and CSV template
+- scoring and source-validation references
+- example prompts for common music workflows
+- install, test, and example commands
 
 ## Repo Layout
 
 ```text
 skills/
   artist-research/
-    SKILL.md
-    references/
-      output-schema.md
-      scoring-rubric.md
-      source-validation.md
   artist-outreach/
-    SKILL.md
 templates/
   artist_prospects.csv
   artist_prospects.schema.json
@@ -48,149 +70,122 @@ scripts/
   example-run.sh
   test.sh
 install.sh
+Makefile
 ```
 
-## Quick Install
+## Quick Start
 
-Run:
-
-```bash
-./install.sh
-```
-
-Or:
+Install both skills:
 
 ```bash
 make install
 ```
 
-That installs both skills into:
+Or:
+
+```bash
+sh ./install.sh
+```
+
+That installs the skills into:
 
 - `~/.claude/skills/`
 - `~/.codex/skills/`
 
-You can override either destination:
-
-```bash
-CLAUDE_SKILLS_DIR=/custom/claude/skills CODEX_SKILLS_DIR=/custom/codex/skills ./install.sh
-```
-
-## Using With Claude
-
-Copy the skill folder into your Claude skills directory:
-
-```bash
-mkdir -p ~/.claude/skills
-cp -R skills/artist-research ~/.claude/skills/
-```
-
-Then invoke it in a session by naming the skill or asking Claude to use the `artist-research` skill.
-Install `artist-outreach` the same way if you want response drafting and outreach prep.
-
-## Using With Codex
-
-Copy the skill folder into your Codex skills directory:
-
-```bash
-mkdir -p ~/.codex/skills
-cp -R skills/artist-research ~/.codex/skills/
-```
-
-Then reference the skill by name in your prompt or install it into your standard skill set.
-
-## Using With Gemini
-
-Gemini skill setups vary by environment, but the portable part is the same: keep the skill folder intact and point Gemini at it through your local skill or prompt-library workflow.
-
-At minimum, copy these folders into whichever prompt or skills directory you use for Gemini:
-
-```bash
-cp -R skills/artist-research /path/to/your/gemini-skills/
-cp -R skills/artist-outreach /path/to/your/gemini-skills/
-```
-
-If your Gemini environment does not support formal skills, you can still use the files as a structured prompt pack by pasting the `SKILL.md` contents plus any needed references.
-
-## Testing
-
-Run:
-
-```bash
-./scripts/test.sh
-```
-
-Or:
+Then verify the repo:
 
 ```bash
 make test
 ```
 
-The test checks:
-
-- required repo files exist
-- `install.sh` copies both skills into temporary Claude and Codex skill directories
-- the installed skill folders contain their `SKILL.md` files
-- the built-in example prompt printer runs successfully
-
-## Example Prompts
-
-Run:
-
-```bash
-./scripts/example-run.sh
-```
-
-Or:
+And print the built-in example prompts:
 
 ```bash
 make examples
 ```
 
-That prints the included example prompts so you can copy them directly into Claude, Codex, or Gemini.
+## Using It
 
-## Prompt Pattern
+The system works best when you specify:
 
-The skill works best when your prompt specifies:
-
-- mission or taste profile
-- target genres and adjacent lanes
-- size ceiling
-- contactability requirements
+- the mission
+- target genres or scenes
+- artist size ceiling
+- contactability rules
 - exclusions
-- output fields
 - desired output format
 
-Minimal example:
+Minimal research example:
 
 ```text
 Use the artist-research skill.
 
-Research underground artists for a compilation.
+Research underground artists for a label compilation.
 
 Target:
-- UK bass, UKG, bassline, breaks, dubstep, grime-adjacent
+- UK bass / UKG / speed garage / bassline / dubstep / 140 / breaks / grime-adjacent / leftfield club
 - under 10k followers
 - independent where possible
 - public contact route required
 
 Output:
 - write a CSV with one row per viable candidate
-- include artist name, handle, main platform, follower estimate, contact path, fit notes, risks, scores, and source links
+- include artist name, handle, platform, follower estimate, contact path, fit notes, risks, scores, and source links
 ```
 
-Follow-up example:
+Minimal outreach example:
 
 ```text
 Use the artist-outreach skill.
 
-Draft short first-contact outreach messages for the High priority artists in my CSV.
-Keep them respectful, direct, and tailored to underground electronic artists.
-Do not sound like a mass email.
+Draft first-contact outreach for the High priority artists in my shortlist.
+Keep each message short, respectful, and tailored.
+Do not sound mass-sent.
 ```
 
-## Notes
+## Examples
 
-- The skill emphasizes selective, practical outreach research rather than list padding.
-- It is designed for public web research and source-backed verification.
-- It assumes the operator may want a CSV, but the workflow is flexible enough for Airtable, Sheets, Markdown, or JSON outputs.
-- The VEXRA use case now lives as an overlay example, not as core repo logic.
+Included prompts cover:
+
+- compilation scouting
+- support-slot scouting
+- a label-specific VEXRA overlay example
+
+Print them with:
+
+```bash
+make examples
+```
+
+## Claude, Codex, and Gemini
+
+This repo was built to be portable across agent workflows.
+
+- Claude: install into `~/.claude/skills/`
+- Codex: install into `~/.codex/skills/`
+- Gemini-style workflows: use the skill folders as prompt-pack references if your setup does not support formal skills
+
+If you need custom install paths:
+
+```bash
+CLAUDE_SKILLS_DIR=/custom/claude/skills CODEX_SKILLS_DIR=/custom/codex/skills sh ./install.sh
+```
+
+## Why This Exists
+
+Most A&R workflows are still half memory, half tabs, half spreadsheets.
+
+That usually means:
+
+- weak verification
+- duplicate effort
+- unclear shortlist quality
+- poor outreach handoff
+
+`artist-scout` is meant to make scouting more selective, more structured, and easier to reuse across releases and teams.
+
+## Release Notes
+
+- music-industry-first positioning
+- generic core workflow, not tied to one label
+- open-source and reusable under MIT
